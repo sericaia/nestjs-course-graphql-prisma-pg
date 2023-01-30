@@ -2,20 +2,25 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Coffee {
-  id: Float!
+type FlavorDto {
+  id: String!
+  name: String!
+}
+
+type CoffeeDto {
+  id: String!
   name: String!
   brand: String!
-  flavors: [String!]!
+  flavors: [FlavorDto!]!
 }
 
 type Query {
-  coffees: [Coffee!]!
-  coffee(id: ID!): Coffee
+  coffees: [CoffeeDto!]!
+  coffee(id: String!): CoffeeDto
 }
 
 type Mutation {
-  createCoffee(createCoffeeInput: CreateCoffeeInput!): Coffee
+  createCoffee(createCoffeeInput: CreateCoffeeInput!): CoffeeDto
 }
 
 input CreateCoffeeInput {

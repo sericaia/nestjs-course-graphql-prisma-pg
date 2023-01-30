@@ -11,8 +11,15 @@ datasource db {
 }
 
 model Coffee {
-  id    Int      @default(autoincrement()) @id
-  name  String
-  brand  String
-  flavors String[]
+  id      String   @id @default(cuid())
+  name    String
+  brand   String
+  flavors Flavor[]
+}
+
+model Flavor {
+  id       String @id @default(cuid())
+  name     String
+  coffeeId String
+  coffee   Coffee @relation(fields: [coffeeId], references: [id])
 }
