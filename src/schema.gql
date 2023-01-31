@@ -2,10 +2,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-interface Drink {
-  name: String!
-}
-
 type FlavorDto {
   id: String!
   name: String!
@@ -22,6 +18,10 @@ type CoffeeDto implements Drink {
   updatedAt: Date
 }
 
+interface Drink {
+  name: String!
+}
+
 type TeaDto implements Drink {
   name: String!
 }
@@ -30,10 +30,12 @@ type TeaDto implements Drink {
 scalar Date
 
 type Query {
-  drinks: [Drink!]!
+  drinks: [DrinksResult!]!
   coffees: [CoffeeDto!]!
   coffee(id: String!): CoffeeDto
 }
+
+union DrinksResult = CoffeeDto | TeaDto
 
 type Mutation {
   createCoffee(createCoffeeInput: CreateCoffeeInput!): CoffeeDto
