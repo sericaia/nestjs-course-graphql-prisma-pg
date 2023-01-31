@@ -2,6 +2,10 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+interface Drink {
+  name: String!
+}
+
 type FlavorDto {
   id: String!
   name: String!
@@ -9,19 +13,24 @@ type FlavorDto {
   updatedAt: Date
 }
 
-type CoffeeDto {
-  id: String!
+type CoffeeDto implements Drink {
   name: String!
+  id: String!
   brand: String!
   flavors: [FlavorDto!]!
   createdAt: Date
   updatedAt: Date
 }
 
+type TeaDto implements Drink {
+  name: String!
+}
+
 """Date custom scalar type"""
 scalar Date
 
 type Query {
+  drinks: [Drink!]!
   coffees: [CoffeeDto!]!
   coffee(id: String!): CoffeeDto
 }

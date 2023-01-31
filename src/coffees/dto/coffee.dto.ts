@@ -1,4 +1,5 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
+import { Drink } from 'src/common/interfaces/drink.interface/drink.interface';
 
 @ObjectType()
 export class FlavorDto {
@@ -8,8 +9,8 @@ export class FlavorDto {
   updatedAt?: Date;
 }
 
-@ObjectType()
-export class CoffeeDto {
+@ObjectType({ implements: Drink })
+export class CoffeeDto implements Drink {
   id: string;
   name: string;
   brand: string;
