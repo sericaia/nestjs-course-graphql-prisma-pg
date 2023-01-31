@@ -10,11 +10,7 @@ export class CoffeesService {
   constructor(private readonly prisma: PrismaService) {}
 
   async findAll(): Promise<CoffeeDto[] | null> {
-    const coffee = await this.prisma.coffee.findMany({
-      include: {
-        flavors: true,
-      },
-    });
+    const coffee = await this.prisma.coffee.findMany();
 
     return coffee.map(mapToCoffeeDto);
   }
@@ -23,9 +19,6 @@ export class CoffeesService {
     const coffee = await this.prisma.coffee.findUnique({
       where: {
         id,
-      },
-      include: {
-        flavors: true,
       },
     });
 
