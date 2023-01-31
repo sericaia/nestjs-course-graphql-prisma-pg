@@ -5,6 +5,8 @@
 type FlavorDto {
   id: String!
   name: String!
+  createdAt: Date
+  updatedAt: Date
 }
 
 type CoffeeDto {
@@ -12,7 +14,12 @@ type CoffeeDto {
   name: String!
   brand: String!
   flavors: [FlavorDto!]!
+  createdAt: Date
+  updatedAt: Date
 }
+
+"""Date custom scalar type"""
+scalar Date
 
 type Query {
   coffees: [CoffeeDto!]!

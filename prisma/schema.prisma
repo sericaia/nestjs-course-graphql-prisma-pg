@@ -11,15 +11,19 @@ datasource db {
 }
 
 model Coffee {
-  id      String   @id @default(cuid())
-  name    String
-  brand   String
-  flavors Flavor[]
+  id        String   @id @default(cuid())
+  name      String
+  brand     String
+  flavors   Flavor[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Flavor {
-  id       String @id @default(cuid())
-  name     String
-  coffeeId String
-  coffee   Coffee @relation(fields: [coffeeId], references: [id], onDelete: Cascade)
+  id        String   @id @default(cuid())
+  name      String
+  coffeeId  String
+  coffee    Coffee   @relation(fields: [coffeeId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

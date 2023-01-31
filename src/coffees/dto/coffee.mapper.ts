@@ -11,5 +11,7 @@ export function mapToCoffeeDto(
     name: coffee.name,
     brand: coffee.brand,
     flavors: coffee.flavors,
+    updatedAt: coffee.updatedAt,
+    createdAt: coffee.createdAt,
   };
 }

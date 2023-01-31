@@ -4,6 +4,8 @@ import { Field, ID, ObjectType } from '@nestjs/graphql';
 export class FlavorDto {
   id: string;
   name: string;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 @ObjectType()
@@ -12,4 +14,6 @@ export class CoffeeDto {
   name: string;
   brand: string;
   flavors?: FlavorDto[];
+  createdAt?: Date;
+  updatedAt?: Date;
 }
