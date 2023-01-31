@@ -3,6 +3,7 @@ import { PrismaService } from 'src/providers/prisma/prisma.service';
 import { CreateCoffeeInput } from './dto/create-coffee.input';
 import { mapToCoffeeDto } from './dto/coffee.mapper';
 import { CoffeeDto } from './dto/coffee.dto';
+import { UpdateCoffeeInput } from './dto/update-coffee.input';
 
 @Injectable()
 export class CoffeesService {
@@ -28,7 +29,7 @@ export class CoffeesService {
       },
     });
 
-    return mapToCoffeeDto(coffee);
+    return coffee ? mapToCoffeeDto(coffee) : null;
   }
 
   async create({
@@ -51,5 +52,39 @@ export class CoffeesService {
     });
 
     return mapToCoffeeDto(coffee);
+  }
+
+  async update(
+    id: string,
+    updateCoffeeInput: UpdateCoffeeInput,
+  ): Promise<CoffeeDto> {
+    const coffee = await this.prisma.coffee.update({
+      where: {
+        id,
+      },
+      data: {
+        name: updateCoffeeInput.name,
+        brand: updateCoffeeInput.brand,
+        // flavors: {
+        //   updateMany: {
+        //     where: {
+        //       coffeeId: id,
+        //     },
+        //     data: updateCoffeeInput.flavors.map((el) => ({
+        //       name: el,
+        //     })),
+        //   },
+        // },
+      },
+    });
+    return coffee ? mapToCoffeeDto(coffee) : null;
+  }
+
+  async delete(id: string): Promise<CoffeeDto> {
+    return this.prisma.coffee.delete({
+      where: {
+        id,
+      },
+    });
   }
 }
