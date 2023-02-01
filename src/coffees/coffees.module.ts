@@ -4,9 +4,10 @@ import { CoffeesResolver } from './coffees.resolver';
 import { CoffeesService } from './coffees.service';
 import { CoffeeFlavorResolver } from './coffee-flavor.resolver';
 import { CoffeesFlavorService } from './coffee-flavor.service';
+import { PubSubModule } from 'src/pub-sub/pub-sub.module';
 
 @Module({
-  imports: [PrismaModule],
+  imports: [PrismaModule, PubSubModule],
   providers: [
     CoffeesResolver,
     CoffeesService,

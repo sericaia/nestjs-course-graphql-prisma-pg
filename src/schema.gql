@@ -54,3 +54,7 @@ input UpdateCoffeeInput {
   brand: String
   flavors: [String!]
 }
+
+type Subscription {
+  newCoffee: CoffeeDto!
+}

@@ -8,6 +8,7 @@ import { CoffeesModule } from './coffees/coffees.module';
 import { DateScalar } from './common/scalars/date.scalar/date.scalar';
 import { TeaDto } from './coffees/dto/tea.dto';
 import { DrinksResolver } from './drinks/drinks.resolver';
+import { PubSubModule } from './pub-sub/pub-sub.module';
 
 @Module({
   imports: [
@@ -17,8 +18,10 @@ import { DrinksResolver } from './drinks/drinks.resolver';
       buildSchemaOptions: {
         orphanedTypes: [TeaDto],
       },
+      installSubscriptionHandlers: true,
     }),
     CoffeesModule,
+    PubSubModule,
   ],
   controllers: [AppController],
   providers: [AppService, DateScalar, DrinksResolver],

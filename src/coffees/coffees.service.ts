@@ -4,10 +4,14 @@ import { CreateCoffeeInput } from './dto/create-coffee.input';
 import { mapToCoffeeDto } from './dto/coffee.mapper';
 import { CoffeeDto } from './dto/coffee.dto';
 import { UpdateCoffeeInput } from './dto/update-coffee.input';
+import { PubSub } from 'graphql-subscriptions';
 
 @Injectable()
 export class CoffeesService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly pubSub: PubSub,
+  ) {}
 
   async findAll(): Promise<CoffeeDto[] | null> {
     const coffee = await this.prisma.coffee.findMany();
@@ -44,7 +48,10 @@ export class CoffeesService {
       },
     });
 
-    return mapToCoffeeDto(coffee);
+    const coffeeDto = mapToCoffeeDto(coffee);
+    this.pubSub.publish('newCoffee', { newCoffee: coffeeDto });
+
+    return coffeeDto;
   }
 
   async update(
