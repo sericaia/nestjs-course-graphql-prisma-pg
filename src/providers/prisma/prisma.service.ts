@@ -3,6 +3,18 @@ import { INestApplication, Injectable, OnModuleInit } from '@nestjs/common';
 
 @Injectable()
 export class PrismaService extends PrismaClient implements OnModuleInit {
+  constructor() {
+    super({
+      log: [
+        // Uncomment these to help with debugging
+        'query',
+        // "info",
+        // "warn",
+        'error',
+      ],
+    });
+  }
+
   async onModuleInit() {
     await this.$connect();
   }
